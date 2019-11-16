@@ -44,4 +44,10 @@ public class PersonaServiceImpl implements PersonaService {
                 .orElseThrow(() -> new PersonaNotFoundException("No data found"));
         return conversionUtil.mapEntityToDto(persona, PersonaDto.class);
     }
+
+    @Override
+    public void deletePersonaById(Integer id) {
+        personaRepo.deleteById(id);
+    }
+
 }

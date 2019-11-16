@@ -17,22 +17,27 @@ public class PersonaController {
     private PersonaService personaService;
 
     @PostMapping
-    public ClientResponse savePersona(@RequestBody PersonaDto personaDto) throws PersonaException {
+    public ClientResponse savePersona(@RequestBody PersonaDto personaDto) {
         personaDto = personaService.savePersona(personaDto);
-        return new ClientResponse<>(personaDto,"Data Saved");
+        return new ClientResponse<>(personaDto, "Data Saved");
     }
 
     @GetMapping
     public ClientResponse getPersonas() throws PersonaException {
         List<PersonaDto> personaDtos = personaService.getAllPersonas();
-        return new ClientResponse<>(personaDtos,"Data Retrieved");
+        return new ClientResponse<>(personaDtos, "Data Retrieved");
     }
 
     @GetMapping("{id}")
     public ClientResponse getPersonaById(@PathVariable("id") Integer id) throws PersonaException {
         PersonaDto personaDto = personaService.getPersonaById(id);
-        return new ClientResponse<>(personaDto,"Data Retrieved");
+        return new ClientResponse<>(personaDto, "Data Retrieved");
     }
 
+    @DeleteMapping("{id}")
+    public ClientResponse deletePersonaById(@PathVariable("id") Integer id) {
+        personaService.deletePersonaById(id);
+        return new ClientResponse<>("Data Deleted");
+    }
 
 }
