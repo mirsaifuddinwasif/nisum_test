@@ -25,7 +25,10 @@ public class PersonaServiceImpl implements PersonaService {
     private ConversionUtil conversionUtil;
 
     @Override
-    public PersonaDto savePersona(PersonaDto personaDto) {
+    public PersonaDto savePersona(PersonaDto personaDto) throws PersonaException {
+        if (Objects.nonNull(personaDto.getId()) && personaRepo.findById(personaDto.getId()).isPresent()) {
+            throw new PersonaException("Persona already exist");
+        }
         PersonaInfo persona = conversionUtil.mapDtoToEntity(personaDto, PersonaInfo.class);
         personaRepo.save(persona);
         log.info("Persona Info is saved with id {}", persona.getId());

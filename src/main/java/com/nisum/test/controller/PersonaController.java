@@ -7,6 +7,7 @@ import com.nisum.test.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class PersonaController {
     private PersonaService personaService;
 
     @PostMapping
-    public ClientResponse savePersona(@RequestBody PersonaDto personaDto) {
+    public ClientResponse savePersona(@RequestBody @Valid PersonaDto personaDto) throws PersonaException {
         personaDto = personaService.savePersona(personaDto);
         return new ClientResponse<>(personaDto, "Data Saved");
     }
