@@ -1,7 +1,11 @@
-package com.nisum.test.Model;
+package com.nisum.test.model;
+
+import com.nisum.test.constant.HairColor;
+import lombok.Data;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 public class PersonaInfo {
 
@@ -17,5 +21,6 @@ public class PersonaInfo {
 
     private Integer phoneNumber;
 
-    private String hairColor;
+    @Enumerated(EnumType.STRING)
+    private HairColor hairColor;
 }
