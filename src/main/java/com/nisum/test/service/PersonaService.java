@@ -14,4 +14,6 @@ public interface PersonaService {
     PersonaDto getPersonaById(Integer id) throws PersonaException;
 
     void deletePersonaById(Integer id);
+
+    PersonaDto updatePersona(PersonaDto personaDto) throws PersonaException;
 }

@@ -20,12 +20,14 @@ public class ExceptionController {
 
         int status;
 
-        if (ex instanceof PersonaNotFoundException || ex instanceof DataAccessException) {
+        if(ex instanceof PersonaNotFoundException || ex instanceof DataAccessException) {
             status = HttpStatus.NOT_FOUND.value();
-        } else if (ex instanceof NullPointerException || "null".equalsIgnoreCase(ex.getMessage())) {
+        }
+        else if(ex instanceof NullPointerException || "null".equalsIgnoreCase(ex.getMessage())) {
             ex = new Exception(ClientMessage.SOMETHING_EXPECTED_ERROR_MESSAGE.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR.value();
-        } else {
+        }
+        else {
             status = HttpStatus.BAD_REQUEST.value();
         }
 

@@ -1,63 +1,48 @@
 package com.nisum.test.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class ClientResponse<T> {
 
     private T responseData;
     private String message;
-    private int responseCode;
-    private String responseStatus;
-    private String exceptionType;
-
-    @JsonIgnore
-    private HttpStatus httpStatus;
-    @JsonIgnore
+    private int statusCode;
     private Exception exception;
 
-    public ClientResponse(T responseData, String message, HttpStatus httpStatus) {
+    public ClientResponse(T responseData, String message, int statusCode, Exception exception) {
         this.responseData = responseData;
         this.message = message;
-        setHttpStatus(httpStatus);
+        this.statusCode = statusCode;
+        this.exception = exception;
     }
 
-    public ClientResponse(T responseData, HttpStatus httpStatus, Exception ex) {
+    public ClientResponse(T responseData, String message, int statusCode) {
         this.responseData = responseData;
-        setException(ex);
-        setHttpStatus(httpStatus);
+        this.message = message;
+        this.statusCode = statusCode;
+    }
+
+    public ClientResponse(String message, Exception exception, int statusCode) {
+        this.message = message;
+        this.statusCode = statusCode;
+        this.exception = exception;
     }
 
     public ClientResponse(T responseData, String message) {
         this.responseData = responseData;
         this.message = message;
-        setHttpStatus(HttpStatus.OK);
-    }
-
-    public ClientResponse(Exception ex, HttpStatus httpStatus) {
-        setException(ex);
-        setHttpStatus(httpStatus);
+        this.statusCode = HttpStatus.OK.value();
     }
 
     public ClientResponse(String message) {
         this.message = message;
-        setHttpStatus(HttpStatus.OK);
+        this.statusCode = statusCode;
+        this.exception = exception;
+        this.statusCode = HttpStatus.OK.value();
     }
-
-    private void setHttpStatus(HttpStatus httpStatus) {
-        this.responseCode = httpStatus.value();
-        this.responseStatus =  httpStatus.getReasonPhrase();
-        this.httpStatus = httpStatus;
-    }
-
-    private void setException(Exception ex) {
-        this.message = ex.getMessage();
-        this.exceptionType = ex.getClass().getSimpleName();
-        this.exception = ex;
-    }
-
 }

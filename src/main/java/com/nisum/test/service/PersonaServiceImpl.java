@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -48,6 +49,20 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     public void deletePersonaById(Integer id) {
         personaRepo.deleteById(id);
+    }
+
+    @Override
+    public PersonaDto updatePersona(PersonaDto personaDto) throws PersonaException {
+        if (Objects.isNull(personaDto.getId())) {
+            throw new PersonaException("Persona id cannot be null");
+        }
+
+        PersonaInfo persona = personaRepo.findById(personaDto.getId())
+                .orElseThrow(() -> new PersonaException("Persona does not exist with id " + personaDto.getId()));
+
+        conversionUtil.mapSourceModelToDestinationModel(personaDto, persona);
+        personaRepo.save(persona);
+        return personaDto;
     }
 
 }
