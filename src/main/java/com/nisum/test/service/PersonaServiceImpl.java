@@ -61,14 +61,13 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaDto updatePersona(PersonaDto personaDto) throws PersonaException {
-        if (Objects.isNull(personaDto.getId())) {
+    public PersonaDto updatePersona(Integer id, PersonaDto personaDto) throws PersonaException {
+        if (Objects.isNull(id)) {
             throw new PersonaException("Persona id cannot be null");
         }
-
-        PersonaInfo persona = personaRepo.findById(personaDto.getId())
-                .orElseThrow(() -> new PersonaException("Persona does not exist with id " + personaDto.getId()));
-
+        PersonaInfo persona = personaRepo.findById(id)
+                .orElseThrow(() -> new PersonaNotFoundException("Persona does not exist with id " + id));
+        personaDto.setId(id);
         conversionUtil.mapSourceModelToDestinationModel(personaDto, persona);
         personaRepo.save(persona);
         return personaDto;

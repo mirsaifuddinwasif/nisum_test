@@ -41,11 +41,9 @@ public class PersonaController {
         return new ClientResponse<>("Data Deleted");
     }
 
-    @PutMapping
-    public ClientResponse updatePersona(@RequestBody PersonaDto personaDto) throws PersonaException {
-        personaDto = personaService.updatePersona(personaDto);
-        return new ClientResponse<>(personaDto,"Data Updated");
+    @PutMapping("{id}")
+    public ClientResponse updatePersona(@PathVariable("id") Integer id, @RequestBody @Valid PersonaDto personaDto) throws PersonaException {
+        personaDto = personaService.updatePersona(id, personaDto);
+        return new ClientResponse<>(personaDto, "Data Updated");
     }
-
-
 }
