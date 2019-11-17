@@ -67,9 +67,10 @@ public class PersonaServiceImpl implements PersonaService {
         }
         PersonaInfo persona = personaRepo.findById(id)
                 .orElseThrow(() -> new PersonaNotFoundException("Persona does not exist with id " + id));
-        personaDto.setId(id);
         conversionUtil.mapSourceModelToDestinationModel(personaDto, persona);
         personaRepo.save(persona);
+        log.info("Persona Info is updated");
+        personaDto.setId(id);
         return personaDto;
     }
 

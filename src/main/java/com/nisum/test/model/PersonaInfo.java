@@ -1,10 +1,16 @@
 package com.nisum.test.model;
 
 import com.nisum.test.constant.HairColor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 public class PersonaInfo {

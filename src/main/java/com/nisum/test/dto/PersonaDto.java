@@ -1,7 +1,10 @@
 package com.nisum.test.dto;
 
 import com.nisum.test.constant.HairColor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +13,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 public class PersonaDto implements Serializable {
 

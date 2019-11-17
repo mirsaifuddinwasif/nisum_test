@@ -1,80 +1,47 @@
 # Persona Info "Nisum Test"
-This project is a simple implementation of **Spring Boot** concepts via CRUD Rest Api's for Nisum Chile technical test.
+This project is implemented in simple spring boot concepts for Nisum Chile technical test.
+```
+git clone https://github.com/mirsaifuddinwasif/nisum_test.git
+```
 
-**Java 1.8 JDK**
+#### Prerequisite
+1. Java 8
+2. Apache Maven 3.6.2
 
-[H2 Console](http://localhost:8082/h2-console)
 
-## Getting Started
-To start this application go to the root folder and run this command in terminal/cmd
-* **mvn clean install**
-* **mvn spring-boot:run**
-###REST CRUD operations
-######GET 
-http://localhost:8082/persona/
-http://localhost:8082/persona/1
+#### Run it!
+```
+mvn clean install
+```
+```
+mvn spring-boot:run
+```
 
-######POST
-http://localhost:8082/persona
+### Accessing Application
+```
+http://localhost:8082/
+```
 
-{
-	"name" : "Saif",
-	"lastName" : "Wasif",
-	"address" : "Flat 22 Al Walja Ruwi Muscat Oman",
-	"phoneNumber" : "94817282",
-	"hairColor" : "black"
-}
+### H2 Database
+H2 in-memory database is used. Database details and records can be viewed through H2 console
 
-######PUT
-http://localhost:8082/persona/1
+[http://localhost:8082/h2-console](http://localhost:8082/h2-console)
 
-{
-	"name" : "Mir",
-	"lastName" : "Uddin",
-	"address" : "Flat 22 Azaiba Muscat Oman",
-	"phoneNumber" : "94817282",
-	"hairColor" : "black"
-}
+JDBC URL:  jdbc:h2:mem:personadb
 
-######DELETE
-http://localhost:8082/persona/1
 
-### Prerequisites
-You need to install these dependencies for running Persona Info project.
+## Swagger - Rest Api Documentation
+Rest services can be tested directly through Swagger UI.
 
-Spring-boot-starter-web
+[http://localhost:8082/swagger-ui.html](http://localhost:8082/swagger-ui.html)
 
-spring-boot-starter-tomcat
 
-spring-boot-starter-test
+Sample Request Body
 
-spring-boot-starter-data-jpa
-
-h2
-
-lombok
-
-modelmapper
-
-springfox-swagger2
-
-### Running the tests
-For test Rest Api Services go to: [Persona Info - Swagger](http://localhost:8082/swagger-ui.html)
-
-### Built With
-* [Spring Boot](https://spring.io/) - End-to-end support for reactive & servlet based apps on the JVM.
-* [Maven](https://maven.apache.org/) - Dependency Management.
-* [Swagger](https://swagger.io/) - Simplify API development for users.
-* [H2](https://www.h2database.com/html/main.html) - Database Engine
-
-### Versioning
-Persona Info used [git](https://git-scm.com/) for version controlling. For the versions available, see the tags on [this](https://github.com/mirsaifuddinwasif/nisum_test) repository.
-
-### Authors
-* **Mir Saif Uddin Wasif** email : mirsaifuddinwasif@gmail.com
-
-### License
-This project is licensed under the MIT License - see the [LICENSE.md]() file for details.
-
-### Acknowledgments
-* [cave of programming](https://caveofprogramming.com/)
+        {
+        	"name": "Mir",
+        	"lastName": "Saif",
+        	"address": "Pakistan",
+        	"phoneNumber": 3212342,
+        	"hairColor": "black"
+        }
